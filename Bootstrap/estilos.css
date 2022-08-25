@@ -9,9 +9,13 @@
     padding: 0%;
  }
 
- .peliCard{
-    
+ .tarjetas{
+    display: flex;
+    padding:10px;
+    margin: 10px;
  }
+    
+ 
 
 
 
