@@ -1,5 +1,8 @@
+
+
 const card = document.getElementById('peliCard')
 const peliculaGratis = []
+
 
 class peliculaFree {
     constructor( titulo, generos, clasificacion, foto) {
@@ -10,12 +13,32 @@ class peliculaFree {
     }}
 
 function agregarPelisGratis() {
-    peliculaGratis.push(new peliculaFree("Scarface", "Accion, Crimen, Drama", "+18"))
-    peliculaGratis.push(new peliculaFree("The godfather", "Accion, Crimen, Mafia", "+16",))
-    peliculaGratis.push(new peliculaFree("Back to the future", "Ciencia ficcion, Fantasia, Comedia cinematografica", "ATP"))
-    peliculaGratis.push(new peliculaFree("Taxi Driver", "Crimen, Drama, Policial", "+16"))
-    peliculaGratis.push(new peliculaFree("Top Gun", "Accion, Aventura, Drama", "ATP"))
-    peliculaGratis.push(new peliculaFree("Gladiator", "Accion, Aventura, Drama", "+13"))
+    peliculaGratis.push(new peliculaFree
+        ("Scarface",
+         "Accion, Crimen, Drama", 
+         "+18", 
+         "./Imagenes/scarface.jpg" ))
+    peliculaGratis.push(new peliculaFree
+        ("The godfather", 
+        "Accion, Crimen, Mafia",
+         "+16",
+          "./Imagenes/padrino.png"))
+    peliculaGratis.push(new peliculaFree
+        ("Back to the future", 
+        "Ciencia ficcion, Fantasia, Comedia cinematografica", "ATP", 
+        "./Imagenes/backtofuture.jpg"))
+    peliculaGratis.push(new peliculaFree
+        ("Taxi Driver", 
+        "Crimen, Drama, Policial", 
+        "+16"))
+    peliculaGratis.push(new peliculaFree
+        ("Top Gun", 
+        "Accion, Aventura, Drama", 
+        "ATP"))
+    peliculaGratis.push(new peliculaFree
+        ("Gladiator", 
+        "Accion, Aventura, Drama", 
+        "+13"))
 }
 
 agregarPelisGratis()
@@ -25,12 +48,12 @@ function crearCards(){
         (peliculaFree => {
         card.innerHTML += `
             <div class="card col" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="...">
+                <img src="${peliculaFree.foto}" class="card-img-top" alt="...">
             <div class="card-body">
-            <h4>${peliculaFree.titulo}</h4>
-            <p class="text-muted">${peliculaFree.generos}</p>
-            <p><b>${peliculaFree.clasificacion}</b></p>
-            <a href="" id="btnCarritoPi" class="btn btn-primary">Ver <b>gratis</b> ahora!</a>
+                <h4>${peliculaFree.titulo}</h4>
+                <p class="text-muted">${peliculaFree.generos}</p>
+                <p><b>${peliculaFree.clasificacion}</b></p>
+                <a href="" id="btnCarritoPi" class="btn btn-primary">Ver <b>gratis</b> ahora!</a>
             </div>
             `;
     }
@@ -112,15 +135,16 @@ function agregarFuncionalidad() {
     })
 }
 
+
 function agregarAlCarrito(pelicula){
     let review = carrito.some(peliculaSome=>peliculaSome.id === pelicula.id)
-    if(review === false){
+        if(review === false){
         pelicula.cantidad = 1
         carrito.push(pelicula)
-    }else{
+        }else{
         let peliFind = carrito.find(peliculaFind=>peliculaFind.id === pelicula.id)
         peliFind.cantidad++
-    }
+        }
     console.log(carrito)
     cargarCarrito()
 }
@@ -154,3 +178,10 @@ function eliminarPelicula(){
 
 crearCard()
 cargarCarrito()
+
+Swal.fire({
+    icon:'warning',
+    title: 'CUIDADO!',
+    text:'Este sitio contiene contenido explicito.',
+})
+
