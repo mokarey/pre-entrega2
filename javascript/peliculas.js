@@ -1,5 +1,4 @@
 const card = document.getElementById('peliCard')
-const peliPaga = document.getElementById('peliCardPaga')
 const peliculaGratis = []
 
 class peliculaFree {
@@ -25,7 +24,6 @@ function crearCards(){
     peliculaGratis.forEach
         (peliculaFree => {
         card.innerHTML += `
-            
             <div class="card col" style="width: 18rem;">
             <img src="" class="card-img-top" alt="...">
             <div class="card-body">
@@ -35,7 +33,6 @@ function crearCards(){
             <a href="" id="btnCarritoPi" class="btn btn-primary">Ver <b>gratis</b> ahora!</a>
             </div>
             `;
-        
     }
 )}
 
@@ -86,37 +83,74 @@ let stockPeliculas = [{
 }]
 
 
+const peliPaga = document.getElementById('peliCardPaga')
+const carritoDiv = document.getElementById('carrito')
 
-let carrito = []
+let carrito = JSON.parse(localStorage.getItem("carrito")) || []
 
-stockPeliculas.forEach((pelicula) => {
-    const div = document.createElement('div')
-    div.classList.add('tarjetas')
-    div.innerHTML = `
+function crearCard() {
+    stockPeliculas.forEach((pelicula) => {
+        peliPaga.innerHTML += `
         <div class="card col" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="...">
+            <img src="" class="card-img-top" alt="...">
         <div class="card-body">
-        <h4>${pelicula.titulo}</h4>
-        <p class="text-muted">${pelicula.generos}</p>
-        <p>${pelicula.clasificacion}</p>
-        <button id="btnCarrito${pelicula.id}" class=""> Agregar al carrito <b>$${pelicula.precio}</b>.</button>
+            <h4>${pelicula.titulo}</h4>
+            <p class="text-muted">${pelicula.generos}</p>
+            <p>${pelicula.clasificacion}</p>
+            <button id="btnCarrito${pelicula.id}" class=""> Agregar al carrito <b>$${pelicula.precio}</b>.</button>
         </div>`
-    
-    peliPaga.appendChild(div)
-
-    
-})
-
-const botonAgregar = document.getElementById (`btnCarrito${pelicula.id}`).addEventListener('click', () => {
-        agregarCarrito(pelicula.id)
-
-    
     })
+    agregarFuncionalidad()
+}
 
-    const agregarCarrito = (peliId) => {
-        const item = stockPeliculas.find((peli) => peli.id === peliId)
-        carrito.push(item)
-        console.log(carrito)
+function agregarFuncionalidad() {
+    stockPeliculas.forEach((pelicula) =>{
+        document.getElementById (`btnCarrito${pelicula.id}`).addEventListener("click", ()=> {
+        console.log(pelicula)
+        agregarAlCarrito(pelicula)
+        })
+    })
+}
+
+function agregarAlCarrito(pelicula){
+    let review = carrito.some(peliculaSome=>peliculaSome.id === pelicula.id)
+    if(review === false){
+        pelicula.cantidad = 1
+        carrito.push(pelicula)
+    }else{
+        let peliFind = carrito.find(peliculaFind=>peliculaFind.id === pelicula.id)
+        peliFind.cantidad++
     }
+    console.log(carrito)
+    cargarCarrito()
+}
 
+function cargarCarrito(){
+    carritoDiv.innerHTML =""
+    carrito.forEach((pelicula)=>{
+        carritoDiv.innerHTML += `
+        <div class="card col" style="width: 18rem;">
+            <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h4>${pelicula.titulo}</h4>
+            <p class="text-muted">Cantidad: ${pelicula.cantidad}</p>
+            <button id="eliminarCarrito${pelicula.id}" class=""><b>Eliminar</b></button>
+        </div>`
+    })
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+    eliminarPelicula()
+}
 
+function eliminarPelicula(){
+    carrito.forEach((pelicula) =>{
+        document
+        .getElementById (`eliminarCarrito${pelicula.id}`)
+        .addEventListener("click", ()=> {
+            carrito = carrito.filter(peliculaFilter=>peliculaFilter.id !== pelicula.id)
+            cargarCarrito()
+        })
+    })
+}
+
+crearCard()
+cargarCarrito()
