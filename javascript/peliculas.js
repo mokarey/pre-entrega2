@@ -1,4 +1,16 @@
+document.addEventListener('DOMContentLoaded', ()=>{
+    fetchData()
+})
 
+const fetchData = async ()=> {
+    try{
+        const res = await fetch ('peliculas.json')
+        const data = await res.json()
+        console.log(data)
+    }catch(error){
+            console.log(error)
+    }
+}
 
 const card = document.getElementById('peliCard')
 const peliculaGratis = []
@@ -61,18 +73,52 @@ function crearCards(){
 
 crearCards()
 
-const boton = document.getElementById('btnCargar')
 
-boton.addEventListener('click', ()=>{
-    const xhr =  new XMLHttpRequest();
-    xhr.open('GET', 'peliculas.json', true);
-    
-     xhr.send()
-})
+let stockPeliculas = [{ 
+    id: 1, 
+    titulo: "The revenant", 
+    generos: "Supervivencia, Aventura, Drama", 
+    clasificacion: "+16", precio: 1499, 
+    Img: ''
+},
+{ 
+    id: 2, 
+    titulo: "Once upon a time in Hollywood", 
+    generos: "Drama, Comedia dramatica, Comedia cinematografica", 
+    clasificacion: "+16", 
+    precio: 2999, 
+    Img: ''},
+{ 
+    id: 3, 
+    titulo: "Bohemian Rhapsody", 
+    generos: "Musical, Musica, Drama", 
+    clasificacion: "+16", 
+    precio: 1999, 
+    Img: ''},
+{ 
+    id: 4, 
+    titulo: "Parasite", 
+    generos: "Thriller, Drama, Comedia cinematografica", 
+    clasificacion: "ATP", 
+    precio: 2999, 
+    Img: ''},
+{ 
+    id: 5, 
+    titulo: "Whiplash", 
+    generos: "Musica, Drama, Cine independiente", 
+    clasificacion: "ATP", 
+    precio: 1499, 
+    Img: ''},
+{ 
+    id: 6, 
+    titulo: "1917", 
+    generos: "Accion, Guerra, Ficcion", 
+    clasificacion: "+16",  
+    precio: 1999, 
+    Img: '',
+}]
 
-boton()
-
-
+const peliPaga = document.getElementById('peliCardPaga')
 const carritoDiv = document.getElementById('carrito')
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
@@ -91,6 +137,10 @@ function crearCard() {
     })
     agregarFuncionalidad()
 }
+
+
+
+
 
 function agregarFuncionalidad() {
     stockPeliculas.forEach((pelicula) =>{
@@ -125,6 +175,7 @@ function cargarCarrito(){
             <h4>${pelicula.titulo}</h4>
             <p class="text-muted">Cantidad: ${pelicula.cantidad}</p>
             <button id="eliminarCarrito${pelicula.id}" class=""><b>Eliminar</b></button>
+            <button id=btnInfo
         </div>`
     })
     localStorage.setItem("carrito", JSON.stringify(carrito))
