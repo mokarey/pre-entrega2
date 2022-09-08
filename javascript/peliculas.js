@@ -57,56 +57,22 @@ function crearCards(){
             </div>
             `;
     }
-)}
+)} 
 
 crearCards()
 
-let stockPeliculas = [{ 
-    id: 1, 
-    titulo: "The revenant", 
-    generos: "Supervivencia, Aventura, Drama", 
-    clasificacion: "+16", precio: 1499, 
-    Img: ''
-},
-{ 
-    id: 2, 
-    titulo: "Once upon a time in Hollywood", 
-    generos: "Drama, Comedia dramatica, Comedia cinematografica", 
-    clasificacion: "+16", 
-    precio: 2999, 
-    Img: ''},
-{ 
-    id: 3, 
-    titulo: "Bohemian Rhapsody", 
-    generos: "Musical, Musica, Drama", 
-    clasificacion: "+16", 
-    precio: 1999, 
-    Img: ''},
-{ 
-    id: 4, 
-    titulo: "Parasite", 
-    generos: "Thriller, Drama, Comedia cinematografica", 
-    clasificacion: "ATP", 
-    precio: 2999, 
-    Img: ''},
-{ 
-    id: 5, 
-    titulo: "Whiplash", 
-    generos: "Musica, Drama, Cine independiente", 
-    clasificacion: "ATP", 
-    precio: 1499, 
-    Img: ''},
-{ 
-    id: 6, 
-    titulo: "1917", 
-    generos: "Accion, Guerra, Ficcion", 
-    clasificacion: "+16",  
-    precio: 1999, 
-    Img: '' 
-}]
+const boton = document.getElementById('btnCargar')
+
+boton.addEventListener('click', ()=>{
+    const xhr =  new XMLHttpRequest();
+    xhr.open('GET', 'peliculas.json', true);
+    
+     xhr.send()
+})
+
+boton()
 
 
-const peliPaga = document.getElementById('peliCardPaga')
 const carritoDiv = document.getElementById('carrito')
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || []
@@ -183,5 +149,9 @@ Swal.fire({
     icon:'warning',
     title: 'CUIDADO!',
     text:'Este sitio contiene contenido explicito.',
+}) 
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    fetchData()
 })
 

@@ -1,0 +1,46 @@
+[{ 
+    "id": 1, 
+    "titulo": "The revenant", 
+    "generos": "Supervivencia, Aventura, Drama", 
+    "clasificacion": "+16", 
+    "precio": 1499
+},
+{ 
+    "id": 2, 
+    "titulo": "Once upon a time in Hollywood", 
+    "generos": "Drama, Comedia dramatica, Comedia cinematografica", 
+    "clasificacion": "+16", 
+    "precio": 2999
+    
+},
+{ 
+    "id": 3, 
+    "titulo": "Bohemian Rhapsody", 
+    "generos": "Musical, Musica, Drama", 
+    "clasificacion": "+16", 
+    "precio": 1999
+    
+},
+    
+{ 
+    "id": 4, 
+    "titulo": "Parasite", 
+    "generos": "Thriller, Drama, Comedia cinematografica", 
+    "clasificacion": "ATP", 
+    "precio": 2999
+},
+{ 
+    "id": 5, 
+    "titulo": "Whiplash", 
+    "generos": "Musica, Drama, Cine independiente", 
+    "clasificacion": "ATP", 
+    "precio": 1499
+},
+{ 
+    "id": 6, 
+    "titulo": "1917", 
+    "generos": "Accion, Guerra, Ficcion", 
+    "clasificacion": "+16",  
+    "precio": 1999
+}]
+    
